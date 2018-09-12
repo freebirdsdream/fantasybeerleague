@@ -11,8 +11,6 @@
 |
 */
 
-Auth::logout();
-
 Route::group(['middleware' => ['auth', 'web']], function () {
 	Route::get('/', 'WelcomeController@index');
 
