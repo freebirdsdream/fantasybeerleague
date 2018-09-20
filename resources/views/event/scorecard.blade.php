@@ -4,7 +4,7 @@
             <tr class="text-orange bg-orange-lightest border-orange-light border-b-2">
                 <th class="p-4 w-3/5">Person / Beer</th>
                 @foreach($tastingGroup->players as $player)
-                    <th class="p-4">{{ $player->name() }}</th>
+                    <th class="p-4">{{ $player->name }}</th>
                 @endforeach
                 <th class="p-4">Event Score</th>
                 <th class="p-4">Event Rank</th>

@@ -60,6 +60,8 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
+        //$event->start();
+
         $tastingGroups = $event->tastingGroups->map(function($group) {
             $group->scores = $group->scores
                 ->groupBy('beer_id')

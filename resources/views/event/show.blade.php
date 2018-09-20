@@ -8,7 +8,7 @@
 
         <div class="scores container">
             @foreach($tastingGroups as $tastingGroup)
-                @include('events.scorecard', ['scores' => $tastingGroup->scores, 'tastingGroup' => $tastingGroup])
+                @include('event.scorecard', ['scores' => $tastingGroup->scores, 'tastingGroup' => $tastingGroup])
             @endforeach
         </div>
     </div>

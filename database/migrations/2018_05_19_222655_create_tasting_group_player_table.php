@@ -13,10 +13,10 @@ class CreateTastingGroupPlayerTable extends Migration
      */
     public function up()
     {
-        Schema::create('tasting_group_player', function (Blueprint $table) {
+        Schema::create('tasting_group_user', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('tasting_group_id');
-            $table->integer('player_id');
+            $table->integer('user_id');
             $table->string('glass', 2);
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ class CreateTastingGroupPlayerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasting_group_player');
+        Schema::dropIfExists('tasting_group_user');
     }
 }

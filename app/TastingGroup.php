@@ -10,7 +10,7 @@ class TastingGroup extends Model
 
     public function players()
     {
-        return $this->belongsToMany('\App\Player', 'tasting_group_player')->withPivot('glass');
+        return $this->belongsToMany('\App\User', 'tasting_group_user')->withPivot('glass');
     }
 
     public function scores()

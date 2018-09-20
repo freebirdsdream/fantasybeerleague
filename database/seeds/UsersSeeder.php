@@ -13,7 +13,7 @@ class UsersSeeder extends Seeder
     {
         $players = [
             ['name' => 'Jeff Basshead', 'email' => '1@gmail.com'],
-            ['name' => 'Jacob Landry', 'email' => 'landry.jacob@gmail.com'],
+            //['name' => 'Jacob Landry', 'email' => 'landry.jacob@gmail.com'],
             ['name' => 'Eddie Conway', 'email' => '2@gmail.com'],
             ['name' => 'Dan Stoe', 'email' => '3@gmail.com'],
             ['name' => 'Keegan Nolan', 'email' => '4@gmail.com'],
