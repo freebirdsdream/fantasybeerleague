@@ -73,6 +73,11 @@ class User extends Authenticatable
         })->first();
     }
 
+    public function tastingGroup()
+    {
+        return $this->belongsToMany('\App\TastingGroup')->withPivot('glass');
+    }
+
     public function assignRole($roles, $targetLeague)
     {
         $leagueRoles = $this->leagues

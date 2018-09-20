@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Event;
 use App\Group;
 use Illuminate\Http\Request;
@@ -110,5 +111,17 @@ class EventController extends Controller
     public function destroy(Event $event)
     {
         //
+    }
+
+    public function score(Event $event)
+    {
+        $tastingGroups = $event->tastingGroups
+            ->filter(function($tastingGroup) {
+                return $tastingGroup->players->pluck('id')->search(Auth::user()->id) === false;
+            });
+
+        return view('event.enterScores')
+            ->with('event', $event)
+            ->with('tastingGroups', $tastingGroups);
     }
 }

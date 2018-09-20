@@ -21,6 +21,7 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 	Route::resource('draft', 'DraftController');
 	Route::resource('group', 'GroupController');
 	Route::resource('event', 'EventController');
+	Route::get('/event/{event}/score', 'EventController@score');
 	Route::resource('rating', 'RatingController');
 
 	/** Private Untappd Calls **/
