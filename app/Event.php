@@ -29,6 +29,12 @@ class Event extends Model
         return $this->hasMany('\App\TastingGroup');
     }
 
+    public function users()
+    {
+        return $this->belongsToMany('\App\User', 'user_event')
+            ->withPivot('attending', 'substitute', 'substitute_accepted');
+    }
+
     /**
      * Start a tasting event
      * This will begin the event by assigning players to tasting groups

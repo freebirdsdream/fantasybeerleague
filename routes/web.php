@@ -15,6 +15,7 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 	Route::get('/', 'WelcomeController@index');
 
 	Route::resource('user', 'UserController');
+	Route::get('/user/attendance/{event}', 'UserController@attendance');
 	Route::resource('league', 'LeagueController');
 	Route::resource('invitation', 'InvitationController');
 	Route::resource('season', 'SeasonController');
@@ -26,6 +27,7 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 
 	/** Private Untappd Calls **/
 	Route::get('/untappd/brewery/{term}', 'UntappdController@brewery')->name('untappd.brewery');
+	Route::get('/untappd/beer/{term}', 'UntappdController@beer')->name('untappd.beer');
 
 	Route::get('/home', 'HomeController@index')->name('home');
 });

@@ -62,6 +62,32 @@ class User extends Authenticatable
 
     public function event()
     {
+        return $this->groups
+                ->first()
+                ->events()
+                ->whereNull('ended_at')
+                ->orderBy('started_at', 'desc')
+                ->first();
+    }
+
+
+    public function attending(Event $event)
+    {
+        $user = $event->users()
+            ->where('user_id', $this->id)
+            ->first();
+
+        if($user) {
+            return $user->pivot
+                ->attending;
+        }
+        else {
+            return null;
+        }
+    }
+    /*
+    public function event()
+    {
         return $this->players->map(function($player) {
             return $player->group
                 ->events()
@@ -72,6 +98,7 @@ class User extends Authenticatable
                 })->first();
         })->first();
     }
+    */
 
     public function tastingGroup()
     {
@@ -97,5 +124,11 @@ class User extends Authenticatable
                 $this->leagues()->updateExistingPivot($targetLeague, ['roles' => json_encode($leagueRoles)]);
             }
         }
+    }
+
+    public function beer()
+    {
+        return $this->belongsToMany('\App\Beer', 'user_beer')
+            ->withPivot('event_id');
     }
 }

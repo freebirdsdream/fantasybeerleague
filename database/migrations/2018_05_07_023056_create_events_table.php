@@ -16,6 +16,7 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('group_id');
+            $table->string('address_name')->nullable()->default('TBA');
             $table->string('address')->nullable();
             $table->dateTime('started_at')->nullable();
             $table->dateTime('locked_at')->nullable();

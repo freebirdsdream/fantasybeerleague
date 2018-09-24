@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Event;
+use Auth;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -75,8 +77,44 @@ class UserController extends Controller
                 'role-target' => 'required'
             ]);
 
-            $user->assignRole([$request->input('role-name')], League::find($target););
+            $user->assignRole([$request->input('role-name')], League::find($target));
         }
+    }
+
+    public function attendance(Request $request, Event $event) 
+    {
+        $event->users()
+            ->attach(Auth::user(), ['attending' => $request->input('attending')]);
+
+        return redirect('/event/' . $event->id);
+    }
+
+    public function beer(Request $request, Event $event)
+    {
+        $brewery = Brewery::firstOrCreate(
+            [
+                'untappd_id' => $request->input('brwery_id')
+            ],
+            [
+                'name' => $request->input('brweery_name')
+            ]
+        );
+        
+        $beer = Beer::firstOrCreate(
+            [
+                'untappd_id' => $request->input('beer_id')
+            ],
+            [
+                'brewery_id' => $brewery->id,
+                'name' => $request->input('beer_name'),
+                'genre' => '',
+                'sub_genre' => ''
+            ]
+        );
+
+        Auth::user()
+            ->beer()
+            ->attach($beer, ['event_id', $event->id]);
     }
 
     /**
