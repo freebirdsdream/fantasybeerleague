@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Survey;
 use Illuminate\Http\Request;
-use App\League;
-use Hash;
-use Auth;
 
-class LeagueController extends Controller
+class SurveyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +24,7 @@ class LeagueController extends Controller
      */
     public function create()
     {
-        return view('league.create');
+        //
     }
 
     /**
@@ -37,45 +35,27 @@ class LeagueController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'location' => 'required',
-            'description' => 'required',
-            'user_id' => 'required|int'
-        ]);
-
-        $league = League::create([
-            'name' => $request->input('name'),
-            'location' => $request->input('location'),
-            'description' => $request->input('description'),
-            'hash' => Hash::make($request->input('name') . time() . rand(0,9999)),
-            'created_by' => $request->input('user_id')
-        ]);
-
-        Auth::user()->assignRole(['admin', 'user'], $league);
-
-        return redirect('/');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Survey  $survey
      * @return \Illuminate\Http\Response
      */
-    public function show(League $league)
+    public function show(Survey $survey)
     {
-        return view('league.show')
-            ->with('league', $league);
+        return view('survey.show');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Survey  $survey
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Survey $survey)
     {
         //
     }
@@ -84,10 +64,10 @@ class LeagueController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Survey  $survey
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Survey $survey)
     {
         //
     }
@@ -95,10 +75,10 @@ class LeagueController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Survey  $survey
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Survey $survey)
     {
         //
     }

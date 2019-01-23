@@ -11,14 +11,14 @@
 
             <p>
             	<form action="{{ route('league.store') }}" method="POST">
-				    <div class="mb-4">
-				      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" name="name" placeholder="League Name">
-				    </div>
-				    <div class="mb-4">
-				    	<input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
-				    	{{ csrf_field() }}
-				    	<input class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded" type="submit" value="Create" />
-				    </div>
+			        @include('assets.input.text', ['name' => 'name', 'placeholder' => 'League Name'])
+                    @include('assets.input.text', ['name' => 'location', 'placeholder' => 'Location'])
+                    @include('assets.input.text', ['name' => 'description', 'placeholder' => 'Description'])
+
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
+                    {{ csrf_field() }}
+                    
+				    @include('assets.input.submit', ['name' => 'Create'])
 				</form>
             </p>
             

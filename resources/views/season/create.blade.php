@@ -10,7 +10,8 @@
             </div>
 
             <p>
-            
+
+            <h4>Beers Allowed</h4>
             
         </div>
         <p class="text-center text-grey text-xs">
