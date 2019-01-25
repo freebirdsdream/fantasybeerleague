@@ -17,7 +17,14 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js'></script>
     <script src="{{ asset('js/typeahead.min.js') }}" type="text/javascript"></script>
     @stack('scripts')
-    Welcome, {{ Auth::user()->name }}
-    @yield('body')
+    Welcome, @if(Auth::user()){{ Auth::user()->name }}@endif
+    <div class="w-3/5 mx-auto mt-6">
+        <div class="bg-white shadow-md rounded mb-4">
+            @yield('body')
+        </div>
+        <p class="text-center text-grey text-xs">
+            ©2018 Acme Corp. All rights reserved.
+        </p>
+    </div>
 </body>
 </html>
