@@ -3,11 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Auth;
 use App\User;
 
 class League extends Model
 {
+    use SoftDeletes;
+    
 	protected $guarded = ['id'];
 	
     public function currentSeason()

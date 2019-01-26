@@ -20,7 +20,9 @@ class CreateLeaguesTable extends Migration
             $table->string('description');
             $table->string('hash');
             $table->integer('created_by');
+            $table->integer('last_edited_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

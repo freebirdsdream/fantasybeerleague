@@ -55,7 +55,7 @@ class LeagueController extends Controller
 
         Auth::user()->assignRole(['admin', 'user'], $league);
 
-        return redirect('/');
+        return redirect('/league');
     }
 
     /**
@@ -76,9 +76,10 @@ class LeagueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(League $league)
     {
-        //
+        return view('league.edit')
+            ->with('league', $league);
     }
 
     /**
@@ -88,9 +89,23 @@ class LeagueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, League $league)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'location' => 'required',
+            'description' => 'required',
+            'user_id' => 'required|int'
+        ]);
+
+        $league->update([
+            'name' => $request->input('name'),
+            'location' => $request->input('location'),
+            'description' => $request->input('description'),
+            'last_edited_by' => $request->input('user_id')
+        ]);
+
+        return redirect('/league/' . $league->id);
     }
 
     /**
@@ -99,8 +114,11 @@ class LeagueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(League $league)
     {
-        //
+        $league->delete();
+
+        return redirect('/league')
+            ->with('status', 'League "' . $league->name . '" deleted');
     }
 }
