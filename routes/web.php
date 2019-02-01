@@ -17,6 +17,9 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 	Route::resource('user', 'UserController');
 	Route::get('/user/attendance/{event}', 'UserController@attendance');
 	Route::resource('league', 'LeagueController');
+	Route::resource('rules', 'LeagueRuleController')
+		->only(['edit', 'update', 'show'])
+		->parameters(['rules' => 'league']);
 	Route::resource('survey', 'SurveyController');
 	Route::resource('invitation', 'InvitationController');
 	Route::resource('season', 'SeasonController');

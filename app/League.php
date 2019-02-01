@@ -41,4 +41,9 @@ class League extends Model
     	return $this->belongsToMany('\App\User', 'user_league')
             ->withPivot('roles');
     }
+
+    public function rules()
+    {
+        return $this->hasOne('\App\LeagueRule');
+    }
 }

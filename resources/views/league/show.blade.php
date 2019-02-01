@@ -6,19 +6,20 @@
 
     <div class="px-8 pb-4">
         <div class="w-full lg:flex">
-            <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('http://1077thejewel.com/wp-content/uploads/people-drinking-beer.jpg')" title="Beer">
+            <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('{{ asset('images/braggot.jpg') }}')" title="Beer">
             </div>
             <div class="border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal w-full">
                 <div clss="mb-8">
                     <div class="text-black font-bold text-xl mb-2">Description</div>
                     {{ $league->description }}
+                    <a class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded cursor-pointer no-underline mr-4" href="{{ route('rules.show', $league) }}">View Rules</a>
                 </div>
                 @if($league->owner(Auth::user()))
                 <div class="w-full mt-4">
                     <div class="text-black font-bold text-xl mb-2">Admin</div>
                     <div class="flex justify-start w-full">
                         <a class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded cursor-pointer no-underline mr-4" href="{{ route('league.edit', $league) }}">Edit League</a>
-                        <a class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded cursor-pointer no-underline mr-4" href="{{ route('league.edit', $league) }}">Edit Rules</a>
+                        <a class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded cursor-pointer no-underline mr-4" href="{{ route('rules.edit', $league) }}">Edit Rules</a>
                         <a class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded cursor-pointer no-underline" href="{{ route('league.edit', $league) }}">Message Members</a>
                     </div>
                 </div>
