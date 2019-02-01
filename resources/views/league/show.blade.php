@@ -11,8 +11,12 @@
             <div class="border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal w-full">
                 <div clss="mb-8">
                     <div class="text-black font-bold text-xl mb-2">Description</div>
-                    {{ $league->description }}
-                    <a class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded cursor-pointer no-underline mr-4" href="{{ route('rules.show', $league) }}">View Rules</a>
+                    <p>
+                        {{ $league->description }}
+                    </p>
+                    <p class="pt-4">
+                        <a class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded cursor-pointer no-underline mr-4" href="{{ route('rules.show', $league) }}">View Rules</a>
+                    </p>
                 </div>
                 @if($league->owner(Auth::user()))
                 <div class="w-full mt-4">
