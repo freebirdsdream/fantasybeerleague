@@ -5,7 +5,7 @@
     
     <div class="flex flex-col">
         <div class="text-left p-4">
-            {{ $text }}
+            {!! Markdown::convertToHtml($text) !!}
         </div>
         @if($rules)
         <hr />
