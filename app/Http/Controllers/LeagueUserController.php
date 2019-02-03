@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\League;
 use App\User;
+use App\Invitation;
+use Auth;
 
 class LeagueUserController extends Controller
 {
@@ -28,16 +30,12 @@ class LeagueUserController extends Controller
 
         if($invitation) {
             $league->members()->attach(Auth::user(), ['roles' => json_encode(['user'])]);
-            /*
             return redirect(route('league.show', ['league' => $league]))
                 ->with('message', 'You have joined ' . $league->name);
-            */  
         }
         else {
             //
         }
-
-        dd('complete');
     }
 
     /**
