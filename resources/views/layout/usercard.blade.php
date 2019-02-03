@@ -17,7 +17,7 @@
 	      		</p>
 	      		<p class="text-grey-darker text-base">{{ $user->name }}</p>
 	    	</div>
-	    	@if(!$league->owner($user))
+	    	@if(Auth::user()->can('update', $league) && !$league->owner($user))
 	    	<div>
 	    		<form action="{{ route('leagueuser.destroy', ['league' => $league, 'user' => $user]) }}" method="POST">
 	    			<input type="hidden" name="_method" value="DELETE" />

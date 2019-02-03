@@ -18,7 +18,7 @@
                         <a class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded cursor-pointer no-underline mr-4" href="{{ route('rules.show', $league) }}">View Rules</a>
                     </p>
                 </div>
-                @if($league->owner(Auth::user()))
+                @if(Auth::user()->can('update', $league))
                 <div class="w-full mt-4">
                     <div class="text-black font-bold text-xl mb-2">Admin</div>
                     <div class="flex justify-start w-full">
