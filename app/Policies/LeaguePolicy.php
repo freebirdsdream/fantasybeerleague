@@ -19,7 +19,7 @@ class LeaguePolicy
      */
     public function view(User $user, League $league)
     {
-        //
+        return $league->members->pluck('id')->search($user->id) !== false;
     }
 
     /**
@@ -30,7 +30,7 @@ class LeaguePolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -66,6 +66,6 @@ class LeaguePolicy
      */
     public function delete(User $user, League $league)
     {
-        //
+        return $league->owner($user);
     }
 }

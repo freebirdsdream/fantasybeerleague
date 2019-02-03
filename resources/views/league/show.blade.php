@@ -18,7 +18,7 @@
                         <a class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded cursor-pointer no-underline mr-4" href="{{ route('rules.show', $league) }}">View Rules</a>
                     </p>
                 </div>
-                @if(Auth::user()->can('update', $league))
+                @can('update', $league)
                 <div class="w-full mt-4">
                     <div class="text-black font-bold text-xl mb-2">Admin</div>
                     <div class="flex justify-start w-full">
@@ -27,7 +27,7 @@
                         <a class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded cursor-pointer no-underline" href="{{ route('leaguemessage.edit', $league) }}">Message Members</a>
                     </div>
                 </div>
-                @endif
+                @endcan
             </div>
         </div>
 
@@ -84,20 +84,22 @@
                         @endif
                     </p>
                 </div>
-                <div class="w-full mt-4">
-                    <div class="text-black font-bold text-xl mb-2">Invite Members</div>
-                    <form class="w-full flex flex-row" action="{{ route('invitation.store') }}" method="POST">
-                        <div class="w-3/4">
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" name="email" placeholder="Email">
-                        </div>
-                        <div class="ml-4 w-1/4">
-                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
-                            <input type="hidden" name="league_id" value="{{ $league->id }}" />
-                            {{ csrf_field() }}
-                            <input class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded w-full" type="submit" value="Send Invitation" />
-                        </div>
-                    </form>
-                </div>
+                @can('update', $league)
+                    <div class="w-full mt-4">
+                        <div class="text-black font-bold text-xl mb-2">Invite Members</div>
+                        <form class="w-full flex flex-row" action="{{ route('invitation.store') }}" method="POST">
+                            <div class="w-3/4">
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" name="email" placeholder="Email">
+                            </div>
+                            <div class="ml-4 w-1/4">
+                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
+                                <input type="hidden" name="league_id" value="{{ $league->id }}" />
+                                {{ csrf_field() }}
+                                <input class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded w-full" type="submit" value="Send Invitation" />
+                            </div>
+                        </form>
+                    </div>
+                @endcan
             </div>
         </div>
         </div>

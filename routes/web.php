@@ -16,16 +16,22 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 
 	Route::resource('user', 'UserController');
 	Route::get('/user/attendance/{event}', 'UserController@attendance');
+
 	Route::resource('league', 'LeagueController');
 	Route::resource('rules', 'LeagueRuleController')
 		->only(['edit', 'update', 'show'])
 		->parameters(['rules' => 'league']);
-	Route::get('leagueuser/{league}', 'LeagueUserController@update')->name('leagueuser.update');
-	Route::delete('leagueuser/{league}/{user}', 'LeagueUserController@destroy')->name('leagueuser.destroy');
+	Route::get('leagueuser/{league}', 'LeagueUserController@update')
+		->name('leagueuser.update')
+		->middleware('can:update,league');
+	Route::delete('leagueuser/{league}/{user}', 'LeagueUserController@destroy')
+		->name('leagueuser.destroy')
+		->middleware('can:update,league');
 
 	Route::resource('leaguemessage', 'LeagueMessageController')
 		->only(['edit', 'update'])
-		->parameters(['leaguemessage' => 'league']);
+		->parameters(['leaguemessage' => 'league'])
+		->middleware('can:update,league');
 
 	Route::resource('survey', 'SurveyController');
 	Route::resource('invitation', 'InvitationController');

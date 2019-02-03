@@ -10,6 +10,14 @@ use Auth;
 class LeagueController extends Controller
 {
     /**
+     * Add Policy
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(League::class, 'league');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
