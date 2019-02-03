@@ -19,7 +19,11 @@
 	    	</div>
 	    	@if(!$league->owner($user))
 	    	<div>
-	    		<a class="bg-white hover:bg-red text-red-dark font-semibold hover:text-white py-2 px-4 border border-red hover:border-transparent rounded cursor-pointer no-underline" href="">Remove</a>
+	    		<form action="{{ route('leagueuser.destroy', ['league' => $league, 'user' => $user]) }}" method="POST">
+	    			<input type="hidden" name="_method" value="DELETE" />
+	    			{{ csrf_field() }}
+	    			<input type="submit" class="bg-white hover:bg-red text-red-dark font-semibold hover:text-white py-2 px-4 border border-red hover:border-transparent rounded cursor-pointer no-underline" value="Remove" />
+	    		</form>
 	    	</div>
 	    	@endif
 	    </div>

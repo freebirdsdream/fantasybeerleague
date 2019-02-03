@@ -65,7 +65,7 @@ class LeagueController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(League $league)
-    {
+    {    
         return view('league.show')
             ->with('league', $league);
     }

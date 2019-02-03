@@ -25,6 +25,12 @@
     @endif
     Welcome, @if(Auth::user()){{ Auth::user()->name }}@endif
     <div class="w-3/5 mx-auto mt-6">
+        @if(session('message'))
+            <div class="bg-green-lightest border border-green-light text-green-dark px-4 py-3 rounded relative m-2" role="alert">
+              <span class="block sm:inline">{{ session('message') }}</span>
+            </div>
+        @endif
+        
         <div class="bg-white shadow-md rounded mb-4">
             @yield('body')
         </div>

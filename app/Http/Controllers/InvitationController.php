@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Invitation;
-use App\Player;
+use App\League;
+use App\User;
 use Illuminate\Http\Request;
 use Auth;
+use App\Mail\LeagueInvitation;
+use Illuminate\Support\Facades\Mail;
 
 class InvitationController extends Controller
 {
@@ -42,13 +45,18 @@ class InvitationController extends Controller
             'league_id' => 'required'
         ]);
 
-        // send email
-
         // create
-        Invitation::create([
+        $invitation = Invitation::create([
             'email' => $request->input('email'),
             'league_id' => $request->input('league_id')
         ]);
+
+        // send email
+        $league = League::find($request->input('league_id'));
+        Mail::to($request->input('email'))->send(new LeagueInvitation($league, $invitation));
+
+        return redirect(route('league.show', ['league' => $league]))
+            ->with('message', 'Invitation sent to ' . $request->input('email'));
     }
 
     /**
