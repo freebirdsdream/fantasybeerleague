@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Invitation;
+use App\LeagueInvitation;
 use App\League;
 use App\User;
 use Illuminate\Http\Request;
 use Auth;
-use App\Mail\LeagueInvitation;
+use App\Mail\LeagueInvitation as LeagueInvitationMail;
 use Illuminate\Support\Facades\Mail;
 
-class InvitationController extends Controller
+class LeagueInvitationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -45,8 +45,18 @@ class InvitationController extends Controller
             'league_id' => 'required'
         ]);
 
+        // check that user doesn't already exist
+        $league = League::find($request->input('league_id'));
+        if(
+            $league->members()->pluck('email')->search($request->input('email')) !== false
+        ) {
+            return redirect(route('league.show', ['league' => $league]))
+                ->with('message', 'User is already a part of this league')
+                ->with('status', 'error');
+        }
+
         // create
-        $invitation = Invitation::create([
+        $invitation = LeagueInvitation::create([
             'email' => $request->input('email'),
             'league_id' => $request->input('league_id')
         ]);
@@ -54,8 +64,7 @@ class InvitationController extends Controller
         // send email
         $league = League::find($request->input('league_id'));
         Mail::to($request->input('email'))
-            ->subject($request->input('subject'))
-            ->send(new LeagueInvitation($league, $invitation));
+            ->send(new LeagueInvitationMail($league, $invitation));
 
         return redirect(route('league.show', ['league' => $league]))
             ->with('message', 'Invitation sent to ' . $request->input('email'));
@@ -64,10 +73,10 @@ class InvitationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Invitation  $invitation
+     * @param  \App\LeagueInvitation  $invitation
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Invitation $invitation)
+    public function show(Request $request, LeagueInvitation $invitation)
     {
         $request->validate([
             'hash' => 'required',
@@ -86,10 +95,10 @@ class InvitationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Invitation  $invitation
+     * @param  \App\LeagueInvitation  $invitation
      * @return \Illuminate\Http\Response
      */
-    public function edit(Invitation $invitation)
+    public function edit(LeagueInvitation $invitation)
     {
         //
     }
@@ -98,10 +107,10 @@ class InvitationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Invitation  $invitation
+     * @param  \App\LeagueInvitation  $invitation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Invitation $invitation)
+    public function update(Request $request, LeagueInvitation $invitation)
     {
         //
     }
@@ -109,10 +118,10 @@ class InvitationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Invitation  $invitation
+     * @param  \App\LeagueInvitation  $invitation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Invitation $invitation)
+    public function destroy(LeagueInvitation $invitation)
     {
         //
     }

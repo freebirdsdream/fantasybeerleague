@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\League;
-use App\Invitation;
+use App\LeagueInvitation as Invitation;
 
 class LeagueInvitation extends Mailable
 {
@@ -32,8 +32,8 @@ class LeagueInvitation extends Mailable
      */
     public function build()
     {
-        return $this->subject('Invitation to Join ' . $this->league.name)
-            ->view('league.invitation')
+        return $this->subject('Invitation to Join ' . $this->league->name)
+            ->view('mail.leagueinvitation')
             ->with('league', $this->league)
             ->with('invitation', $this->invitation);
     }

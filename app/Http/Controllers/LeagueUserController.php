@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\League;
 use App\User;
-use App\Invitation;
+use App\LeagueInvitation;
 use Auth;
 
 class LeagueUserController extends Controller
@@ -24,9 +24,19 @@ class LeagueUserController extends Controller
             'email' => 'required'
         ]);
 
-        $invitation = Invitation::where('email', $request->input('email'))
+        $invitation = LeagueInvitation::where('email', $request->input('email'))
             ->where('id', $request->input('invitation'))
             ->first();
+
+        // check that user doesn't already exist in league
+        $league = $invitation->league;
+        if(
+            $league->members->pluck('id')->search(Auth::user()->id) !== false
+        ) {
+            return redirect(route('league.show', ['league' => $league]))
+                ->with('message', 'You are already a part of this league')
+                ->with('status', 'error');
+        }
 
         if($invitation) {
             $league->members()->attach(Auth::user(), ['roles' => json_encode(['user'])]);
@@ -34,7 +44,7 @@ class LeagueUserController extends Controller
                 ->with('message', 'You have joined ' . $league->name);
         }
         else {
-            //
+            abort(401);
         }
     }
 

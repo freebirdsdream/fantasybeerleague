@@ -13,7 +13,7 @@ class CreateLeagueInvitationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('invitations', function (Blueprint $table) {
+        Schema::create('league_invitations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('email');
             $table->integer('league_id');

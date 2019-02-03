@@ -87,7 +87,7 @@
                 @can('update', $league)
                     <div class="w-full mt-4">
                         <div class="text-black font-bold text-xl mb-2">Invite Members</div>
-                        <form class="w-full flex flex-row" action="{{ route('invitation.store') }}" method="POST">
+                        <form class="w-full flex flex-row" action="{{ route('leagueinvitation.store') }}" method="POST">
                             <div class="w-3/4">
                                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" name="email" placeholder="Email">
                             </div>

@@ -17,18 +17,19 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js'></script>
     <script src="{{ asset('js/typeahead.min.js') }}" type="text/javascript"></script>
     @stack('scripts')
-    @if(session('status'))
-    <div class="bg-red-lightest border-l-4 border-red text-red-dark p-4" role="alert">
-      <p class="font-bold">Notice</p>
-      <p>{{ session('status') }}</p>
-    </div>
-    @endif
     Welcome, @if(Auth::user()){{ Auth::user()->name }}@endif
     <div class="w-3/5 mx-auto mt-6">
         @if(session('message'))
-            <div class="bg-green-lightest border border-green-light text-green-dark px-4 py-3 rounded relative m-2" role="alert">
-              <span class="block sm:inline">{{ session('message') }}</span>
-            </div>
+            @if(session('status'))
+                <div class="bg-red-lightest border border-red-light text-green-red px-4 py-3 rounded relative m-2" role="alert">
+                  <span class="font-bold">Error!</span>
+                  <span class="block sm:inline">{{ session('message') }}</span>
+                </div>
+            @else
+                <div class="bg-green-lightest border border-green-light text-green-dark px-4 py-3 rounded relative m-2" role="alert">
+                  <span class="block sm:inline">{{ session('message') }}</span>
+                </div>
+            @endif
         @endif
         
         <div class="bg-white shadow-md rounded mb-4">

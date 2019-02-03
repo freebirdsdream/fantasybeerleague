@@ -28,13 +28,15 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 		->name('leagueuser.destroy')
 		->middleware('can:update,league');
 
+	Route::resource('leagueinvitation', 'LeagueInvitationController');
+
 	Route::resource('leaguemessage', 'LeagueMessageController')
 		->only(['edit', 'update'])
 		->parameters(['leaguemessage' => 'league'])
 		->middleware('can:update,league');
 
 	Route::resource('survey', 'SurveyController');
-	Route::resource('invitation', 'InvitationController');
+
 	Route::resource('season', 'SeasonController');
 	Route::resource('draft', 'DraftController');
 	Route::resource('group', 'GroupController');

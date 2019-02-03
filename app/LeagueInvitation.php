@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Invitation extends Model
+class LeagueInvitation extends Model
 {
     protected $guarded = ['id'];
 
     public function league()
     {
-    	return $this->belongsTo('\App\League');
+    	return $this->belongsTo('\App\League', 'league_id', 'id');
     }
 }
