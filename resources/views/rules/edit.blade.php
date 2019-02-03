@@ -10,7 +10,7 @@
 
         <p>
         	<form action="{{ route('rules.update', $league) }}" method="POST">
-		        @include('assets.input.textarea', ['name' => 'text', 'rules' => $rules])
+		        @include('assets.input.textarea', ['name' => 'text', 'placeholder' => 'Rules', 'text' => $rules->text])
 
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
                 <input type="hidden" name="_method" value="PUT">

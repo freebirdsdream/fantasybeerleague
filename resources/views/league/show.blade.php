@@ -24,7 +24,7 @@
                     <div class="flex justify-start w-full">
                         <a class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded cursor-pointer no-underline mr-4" href="{{ route('league.edit', $league) }}">Edit League</a>
                         <a class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded cursor-pointer no-underline mr-4" href="{{ route('rules.edit', $league) }}">Edit Rules</a>
-                        <a class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded cursor-pointer no-underline" href="{{ route('league.edit', $league) }}">Message Members</a>
+                        <a class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded cursor-pointer no-underline" href="{{ route('leaguemessage.edit', $league) }}">Message Members</a>
                     </div>
                 </div>
                 @endif

@@ -23,6 +23,10 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 	Route::get('leagueuser/{league}', 'LeagueUserController@update')->name('leagueuser.update');
 	Route::delete('leagueuser/{league}/{user}', 'LeagueUserController@destroy')->name('leagueuser.destroy');
 
+	Route::resource('leaguemessage', 'LeagueMessageController')
+		->only(['edit', 'update'])
+		->parameters(['leaguemessage' => 'league']);
+
 	Route::resource('survey', 'SurveyController');
 	Route::resource('invitation', 'InvitationController');
 	Route::resource('season', 'SeasonController');

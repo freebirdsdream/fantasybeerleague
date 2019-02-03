@@ -32,7 +32,8 @@ class LeagueInvitation extends Mailable
      */
     public function build()
     {
-        return $this->view('league.invitation')
+        return $this->subject('Invitation to Join ' . $this->league.name)
+            ->view('league.invitation')
             ->with('league', $this->league)
             ->with('invitation', $this->invitation);
     }
