@@ -15,8 +15,8 @@ class CreateBeerStylesTable extends Migration
     {
         Schema::create('beer_styles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('term');
-            $table->string('brewers_association');
+            $table->string('style');
+            $table->json('brewers_association');
             $table->timestamps();
         });
     }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Season;
+use App\League;
+use App\BeerStyle;
 use Illuminate\Http\Request;
 
 class SeasonController extends Controller
@@ -22,9 +24,12 @@ class SeasonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $styles = BeerStyle::all();
+        return view('season.create')
+            ->with('league', League::find($request->input('league_id')))
+            ->with('styles', $styles);
     }
 
     /**
@@ -38,6 +43,8 @@ class SeasonController extends Controller
          $request->validate([
             'league_id' => 'required'
         ]);
+
+         // create surveys
 
         $seasons = Season::where('league_id', $request->input('league_id'))
             ->orderBy('number', 'desc')

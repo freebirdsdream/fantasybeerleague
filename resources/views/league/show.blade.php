@@ -58,7 +58,7 @@
                         </p>
                     </div>
                     <div class="flex items-center">
-                        <form action="{{ route('season.store') }}" method="POST">
+                        <form action="{{ route('season.create') }}" method="GET">
                             <div class="mb-4">
                                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
                                 <input type="hidden" name="league_id" value="{{ $league->id }}" />
