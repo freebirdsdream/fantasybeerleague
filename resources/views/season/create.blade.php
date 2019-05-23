@@ -11,7 +11,7 @@
             </div>
             <div class="w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                 <div class="mb-8">
-                    <form action="route('season.store')" method="POST">
+                    <form action="{{ route('season.store') }}" method="POST">
                         <h4>Beers Allowed</h4>
                         <div class="flex flex-wrap mb-4">
                             <div id="styles" class="flex flex-wrap">
@@ -54,6 +54,9 @@
                                 </div>
                             @endforeach
                         </div>
+
+                        {{ csrf_field() }}
+                        <input type="hidden" name="league_id" value="{{ $league->id }}" />
 
                         <input type="submit" class="m-1 p-4 border border-yellow-light rounded-lg bg-yellow hover:bg-yellow cursor-pointer" value="Save Season and Send Surveys" />
                     </form>

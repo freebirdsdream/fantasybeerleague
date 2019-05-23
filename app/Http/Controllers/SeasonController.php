@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Season;
 use App\League;
 use App\BeerStyle;
+use App\Survey;
 use Illuminate\Http\Request;
+use Auth;
 
 class SeasonController extends Controller
 {
@@ -44,8 +46,6 @@ class SeasonController extends Controller
             'league_id' => 'required'
         ]);
 
-         // create surveys
-
         $seasons = Season::where('league_id', $request->input('league_id'))
             ->orderBy('number', 'desc')
             ->get();
@@ -56,10 +56,34 @@ class SeasonController extends Controller
             $season = 1;
         }
 
-        Season::create([
+        $season = Season::create([
             'league_id' => $request->input('league_id'),
             'number' => $season
         ]);
+
+        // create surveys
+        $survey = Survey::create([
+            'season_id' => $season->id,
+            'days' => json_encode($request->input('days')),
+            'times' => json_encode($request->input('times')),
+            'start_date' => $request->input('start_date'),
+            'end_date' => $request->input('end_date'),
+            'created_by' => Auth::user()->id
+        ]);
+
+        // map and create styles
+        foreach($request->input('styles') as $style) {
+            if(is_int($style)) {
+                // attach
+                $survey->attach(Style::find($style));
+            } else {
+                // create and attach
+                $style = Style::create(['style' => $style]);
+                $survey->attach($style->id);
+            }
+        }
+
+        return redirect(route('league.show', ['league' => $request->input('league_id')]));
     }
 
     /**
