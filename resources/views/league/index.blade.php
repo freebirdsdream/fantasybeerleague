@@ -51,18 +51,5 @@
               </div>
             </div>
         </div>
-
-        <div>
-
-        </div>
     @endif
-
-    <div class="flex justify-between" style="padding: 15px;">
-        <a href="{{ route('league.index') }}" class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded m-2" style="text-decoration: none;">
-            Join League
-        </a>
-        <a href="{{ route('league.create') }}" class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded m-2" style="text-decoration: none;">
-            Create League
-        </a>
-    </div>
 @endsection

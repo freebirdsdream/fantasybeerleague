@@ -1,11 +1,9 @@
 @extends('master')
 
 @section('body')
-    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <h2>Create League</h2>
-
+    <div class="w-5/6 m-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <div style="color: #F2D024; width: 100%; text-align: center; padding: 25px;">
-                <i class="fa fa-beer fa-4x"></i>
+            @include('layout.title', ['name' => 'Create League'])
         </div>
 
         <p>
