@@ -7,7 +7,7 @@
         </div>
         @include('layout.title', ['name' => $league->name])
 
-        <div class="px-8 pb-4">
+        <div class="px-8 pb-4 w-5/6 m-auto">
             <div class="w-full lg:flex">
                 <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('{{ asset('images/braggot.jpg') }}')" title="Beer">
                 </div>

@@ -7,6 +7,7 @@ use App\League;
 use App\User;
 use App\LeagueInvitation;
 use Auth;
+use DB;
 
 class LeagueUserController extends Controller
 {

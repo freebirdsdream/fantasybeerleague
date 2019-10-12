@@ -63,8 +63,11 @@ class LeagueInvitationController extends Controller
 
         // send email
         $league = League::find($request->input('league_id'));
+        /*
+         * @TODO enable this later
         Mail::to($request->input('email'))
             ->send(new LeagueInvitationMail($league, $invitation));
+        */
 
         return redirect(route('league.show', ['league' => $league]))
             ->with('message', 'Invitation sent to ' . $request->input('email'));

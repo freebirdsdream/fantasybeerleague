@@ -42,6 +42,10 @@ class LeaguePolicy
      */
     public function update(User $user, League $league)
     {
+        // if this is an invitation accept, move on
+        if(request()->route()->getName() == 'leagueuser.update') {
+            return true;
+        }
         // if the current logged in user is the owner we're ok
         if($league->owner($user)) {
             return true;
@@ -51,8 +55,14 @@ class LeaguePolicy
         $roles = $user->leagues
             ->filter(function($pivot) use($league) {
                 return $pivot->id == $league->id;
-            })->first()->pivot->roles;
-        $roles = json_decode($roles);
+            })->first();
+        if($roles) {
+            $roles = $roles->pivot->roles;
+            $roles = json_decode($roles);
+        }
+        else {
+            $roles = [];
+        }
 
         return in_array("admin", $roles);
     }
