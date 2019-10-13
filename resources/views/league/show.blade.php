@@ -89,6 +89,14 @@
                     </div>
                     @can('update', $league)
                         <div class="w-full mt-4">
+                            @if($league->invitations)
+                                <div class="text-black font-bold text-xl mb-2">Outstanding Invitations</div>
+                                <div class="flex flex-col">
+                                    @foreach($league->invitations as $invitation)
+                                        <a href="http://beerleague.test/leagueuser/{{ $league->id }}?email={{ urlencode($invitation->email) }}&invitation={{ $invitation->id }}">http://beerleague.test/leagueuser/{{ $league->id }}?email={{ urlencode($invitation->email) }}&invitation={{ $invitation->id }}</a>
+                                    @endforeach
+                                </div>
+                            @endif
                             <div class="text-black font-bold text-xl mb-2">Invite Members</div>
                             <form class="w-full flex flex-row" action="{{ route('leagueinvitation.store') }}" method="POST">
                                 <div class="w-3/4">

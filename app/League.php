@@ -28,7 +28,7 @@ class League extends Model
 
     public function invitations()
     {
-    	return $this->hasMany('\App\Invitation');
+    	return $this->hasMany('\App\LeagueInvitation');
     }
 
     public function owner(User $user)

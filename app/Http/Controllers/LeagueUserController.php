@@ -29,11 +29,14 @@ class LeagueUserController extends Controller
             ->where('id', $request->input('invitation'))
             ->first();
 
+        if(!$invitation) {
+            abort(404, 'This invitation has already been redeemed');
+        }
+
         // check that user doesn't already exist in league
         $league = $invitation->league;
-        if(
-            $league->members->pluck('id')->search(Auth::user()->id) !== false
-        ) {
+        if($league->members->pluck('id')->search(Auth::user()->id) !== false) {
+            $invitation->delete();
             return redirect(route('league.show', ['league' => $league]))
                 ->with('message', 'You are already a part of this league')
                 ->with('status', 'error');
@@ -41,6 +44,7 @@ class LeagueUserController extends Controller
 
         if($invitation) {
             $league->members()->attach(Auth::user(), ['roles' => json_encode(['user'])]);
+            $invitation->delete();
             return redirect(route('league.show', ['league' => $league]))
                 ->with('message', 'You have joined ' . $league->name);
         }
