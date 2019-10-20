@@ -74,7 +74,7 @@ class SeasonController extends Controller
 
         // map and create styles
         foreach($request->input('styles') as $style) {
-            if(is_int($style)) {
+            if(BeerStyle::find($style)) {
                 // attach
                 $survey->style()->attach(BeerStyle::find($style));
             } else {
