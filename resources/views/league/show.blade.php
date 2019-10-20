@@ -2,12 +2,9 @@
 
 @section('body')
     <div class="w-full mt-0">
-        <div class="h-64 overflow-hidden">
-            <img class="w-full rounded-t" src="https://craftbeerclub.com/media/gm/user/gmwc/img_cbc/craft-beer-club-beer-flight.jpg" alt="Sunset in the mountains">
-        </div>
-        @include('layout.title', ['name' => $league->name])
+        @include('layout.header', ['name' => $league->name])
 
-        <div class="px-8 pb-4 w-5/6 m-auto">
+        <div class="px-8 pb-4 w-5/6 m-auto mt-6">
             <div class="w-full lg:flex">
                 <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('{{ asset('images/braggot.jpg') }}')" title="Beer">
                 </div>

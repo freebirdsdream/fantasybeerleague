@@ -1,13 +1,9 @@
 @extends('master')
 
 @section('body')
-    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <h2>Create League</h2>
+    @include('layout.header', ['name' => 'Manage League'])
 
-        <div style="color: #F2D024; width: 100%; text-align: center; padding: 25px;">
-                <i class="fa fa-beer fa-4x"></i>
-        </div>
-
+    <div class="w-5/6 m-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-6">
         <p>
         	<form action="{{ route('league.update', $league) }}" method="POST">
 		        @include('assets.input.text', ['name' => 'name', 'placeholder' => 'League Name', 'value' => $league->name])

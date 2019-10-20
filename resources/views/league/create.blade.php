@@ -3,7 +3,7 @@
 @section('body')
     <div class="w-5/6 m-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <div style="color: #F2D024; width: 100%; text-align: center; padding: 25px;">
-            @include('layout.title', ['name' => 'Create League'])
+            @include('layout.title', ['name' => 'Manage League'])
         </div>
 
         <p>
