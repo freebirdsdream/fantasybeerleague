@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Beer;
 use App\Season;
 use App\League;
 use App\BeerStyle;
@@ -28,7 +29,7 @@ class SeasonController extends Controller
      */
     public function create(Request $request)
     {
-        $styles = BeerStyle::all();
+        $styles = BeerStyle::all()->sortBy('style');
         return view('season.create')
             ->with('league', League::find($request->input('league_id')))
             ->with('styles', $styles);
@@ -66,8 +67,8 @@ class SeasonController extends Controller
             'season_id' => $season->id,
             'days' => json_encode($request->input('days')),
             'times' => json_encode($request->input('times')),
-            'start_date' => $request->input('start_date'),
-            'end_date' => $request->input('end_date'),
+            'start_date' => date('Y-m-d', strtotime($request->input('start_date'))),
+            'end_date' => date('Y-m-d', strtotime($request->input('end_date'))),
             'created_by' => Auth::user()->id
         ]);
 
@@ -75,11 +76,11 @@ class SeasonController extends Controller
         foreach($request->input('styles') as $style) {
             if(is_int($style)) {
                 // attach
-                $survey->attach(Style::find($style));
+                $survey->style()->attach(BeerStyle::find($style));
             } else {
                 // create and attach
-                $style = Style::create(['style' => $style]);
-                $survey->attach($style->id);
+                $style = BeerStyle::create(['style' => $style]);
+                $survey->style()->attach($style->id);
             }
         }
 

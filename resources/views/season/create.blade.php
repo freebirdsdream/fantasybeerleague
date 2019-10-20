@@ -1,8 +1,7 @@
 @extends('master')
 
 @section('body')
-    <img class="w-full rounded-t" src="https://craftbeerclub.com/media/gm/user/gmwc/img_cbc/craft-beer-club-beer-flight.jpg" alt="Sunset in the mountains">
-    @include('layout.title', ['name' => $league->name . ' - Create Season'])
+    @include('layout.header', ['name' => $league->name . ' - Create Season'])
 
     <div id="date" class="hidden" year="{{ date('Y') }}" month="{{ date('m') }}" day="{{ date('d') }}"></div>
     <div id="season" class="px-8 pb-4">
@@ -30,9 +29,9 @@
                         
                         <h4>Start/End Dates (tentative)</h4>
                         <div class="flex mb-4 justify-between items-center">
-                            <datepicker class="border border-yellow-lighter rounded-lg p-2 w-2/5" :value="date" name="uniquename"></datepicker>
+                            <datepicker class="border border-yellow-lighter rounded-lg p-2 w-2/5" :value="date" name="start_date"></datepicker>
                             To
-                            <datepicker class="border border-yellow-lighter rounded-lg p-2 w-2/5" :value="date" name="uniquename"></datepicker>
+                            <datepicker class="border border-yellow-lighter rounded-lg p-2 w-2/5" :value="date" name="end_date"></datepicker>
                         </div>
                         
                         <h4>Meeting Days</h4>

@@ -10,6 +10,6 @@ class Survey extends Model
 
     public function style()
     {
-        return $this->belongsToMany('App\Style');
+        return $this->belongsToMany('App\BeerStyle', 'survey_styles', 'survey_id', 'style_id');
     }
 }
